@@ -8,6 +8,7 @@ Before you begin, ensure you have met the following requirements:
 - You have access to an OpenAI API key.
 
 ## Setup
+
 To set up the project, follow these steps:
 ```
 git clone https://github.com/MaherShahin/script_generator/
@@ -18,7 +19,9 @@ pip install -r requirements.txt
 ```
 
 Set up the .env file with your OpenAI API key:
+```
 OPENAI_API_KEY=your-api-key-here
+```
 
 ## Usage
 To run the chatbot, execute the main.py file:
