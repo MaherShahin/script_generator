@@ -9,11 +9,11 @@ Before you begin, ensure you have met the following requirements:
 
 ## Setup
 To set up the project, follow these steps:
-`git clone https://github.com/MaherShahin/script_generator/`
-`cd shell-script-generator`
-`python3 -m venv venv`
-`source venv/bin/activate`
-`pip install -r requirements.txt`
+```git clone https://github.com/MaherShahin/script_generator/```
+```cd shell-script-generator```
+```python3 -m venv venv```
+```source venv/bin/activate```
+```pip install -r requirements.txt```
 
 Set up the .env file with your OpenAI API key:
 OPENAI_API_KEY=your-api-key-here
