@@ -25,7 +25,9 @@ OPENAI_API_KEY=your-api-key-here
 
 ## Usage
 To run the chatbot, execute the main.py file:
+```
 python main.py
+```
 
 You should see the chatbot start up and prompt you for input. Enter a message and press Enter to receive a response from the GPT-3.5 Turbo model.
 
