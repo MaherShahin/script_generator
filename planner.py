@@ -20,11 +20,7 @@ class Planner:
         plan_prompt = self.create_plan_prompt(script_plan, user_feedback)
         if not plan_prompt:
             return None
-        messages = [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": plan_prompt},
-        ]
-        plan_response = self.gpt_client.query_gpt(messages=messages)
+        plan_response = self.gpt_client.query_gpt(plan_prompt)
         if not plan_response:
             return None
         plans = plan_response.split("\n")
