@@ -31,29 +31,6 @@ python main.py
 
 You should see the chatbot start up and prompt you for input. Enter a message and press Enter to receive a response from the GPT-3.5 Turbo model.
 
-## prompts.json
-The prompts.json file contains the prompts for the GPT language model. The templates in this file can be modified to suit the needs of the user. The file is structured as a dictionary with four keys, each representing a different type of prompt.
-
-The first key, "clarification," contains a template that prompts the user to provide more details about a problem they are facing. It asks for information about the problem, the constraints, and the acceptance criteria.
-
-The second key, "plan," contains a template that asks the user to provide three possible plans of action based on the problem, acceptance criteria, and constraints they have provided.
-
-The third key, "generation," contains a template that asks the user to select one of the plans provided in response to the "plan" prompt.
-
-The fourth key, "edit," contains a template that asks the user to edit a plan they have previously provided, along with feedback on the plan.
-
-Users can modify the templates in this file to suit their specific needs. They can also add new keys to the file to create additional prompts. To use the modified prompts, the user should ensure that the "prompts.json" file is updated and located in the root directory of the project.
-
-## Planner Class
-The Planner class is responsible for generating a plan for the shell script based on the user input and preferences. The constructor takes two parameters, template_manager and gpt_client, which are used to load the prompts and communicate with the OpenAI API, respectively.
-
-The execute_planning method generates a plan prompt by calling the create_plan_prompt method, which fills in the template with the user input and preferences. The plan prompt is then sent to the OpenAI API via the gpt_client object to generate suggested plans.
-
-The choose_plan method allows the user to select one of the generated plans, request more plans, or edit a plan. If the user selects to edit a plan, the edit template is loaded and the user is prompted to enter feedback for the selected plan. The updated plan is then returned to be displayed to the user.
-
-The display_plans method displays the generated plans to the user, and the create_plan_prompt method fills in the variables in the plan template with the user input and preferences to create the plan prompt.
-
-This architecture allows for customization by enabling the developer to add or remove templates, change the variables in the templates, or change the logic in the choose_plan method to provide a different user experience.
 
 ## Basic Flow:
 
