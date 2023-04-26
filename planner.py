@@ -7,7 +7,6 @@ class Planner:
         plan_template = self.template_manager.load_template("plan")
         if not plan_template:
             return None
-        variables = self.template_manager.get_template_variables("plan")
         plan_prompt = plan_template.format(**{
             "problem": script_plan.problem,
             "acceptance_criteria": script_plan.acceptance_criteria,
@@ -20,12 +19,17 @@ class Planner:
         plan_prompt = self.create_plan_prompt(script_plan, user_feedback)
         if not plan_prompt:
             return None
-        plan_response = self.gpt_client.query_gpt(plan_prompt)
+        messages = [
+            {"role": "system", "text": "You are a helpful assistant."},
+            {"role": "user", "text": plan_prompt},
+        ]
+        plan_response = self.gpt_client.query_gpt(messages=messages)
         if not plan_response:
             return None
         plans = plan_response.split("\n")
         chosen_plan, choice = self.choose_plan(plans, plan_prompt)
         return chosen_plan, choice
+
 
     def display_plans(self, plans):
         print("\nGPT-4 suggested plans:")
