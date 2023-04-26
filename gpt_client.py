@@ -14,15 +14,14 @@ class GPTClient:
 
             if not (0 < temperature <= 1):
                 raise ValueError("temperature should be within the range (0, 1]")
-
+            
+              #Make your OpenAI API request here
             response = openai.ChatCompletion.create(
-                engine="gpt-3.5-turbo",
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-            )
-
-            result = response.choices[0].text.strip()
+                model="gpt-3.5-turbo",
+                messages=messages
+                )
+            
+            result = response
 
             if not result:
                 raise ValueError("The GPT-4 model returned an empty or incomplete response")
@@ -37,6 +36,18 @@ class GPTClient:
             print(f"An error occurred while querying the GPT-4 model: {e}")
         except ValueError as e:
             print(f"Value error: {e}")
+        except openai.error.APIError as e:
+            #Handle API error here, e.g. retry or log
+            print(f"OpenAI API returned an API Error: {e}")
+            pass
+        except openai.error.APIConnectionError as e:
+            #Handle connection error here
+            print(f"Failed to connect to OpenAI API: {e}")
+            pass
+        except openai.error.RateLimitError as e:
+            #Handle rate limit error 
+            print(f"OpenAI API request exceeded rate limit: {e}")
+            pass
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
