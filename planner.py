@@ -1,6 +1,9 @@
+from rich import print
+from rich.panel import Panel
+
 class Planner:
-    def __init__(self, template_manager, gpt_client):
-        self.template_manager = template_manager
+    def __init__(self,gpt_client, template_manager=None):
+        self.template_manager = None
         self.gpt_client = gpt_client
 
     def create_plan_prompt(self, script_plan, user_feedback):
@@ -30,11 +33,29 @@ class Planner:
         return plans, messages
 
 
-
-
     def display_plans(self, plans):
-        print("\nGPT-4 suggested plans:")
-        print(plans)
+        print("\n[bold]GPT-4 suggested plans:[/bold]")
+        
+        plan_number = 1
+        plan_title = ""
+        plan_content = []
+
+        for line in plans:
+            if 'Plan ' in line:
+                if plan_title:  # Check if plan_title is not empty
+                    panel = Panel(f"{plan_title}\n{''.join(plan_content)}", expand=False)
+                    print(panel)
+                    plan_title = ""
+                    plan_content = []
+                plan_title = f"Plan {plan_number}: {line.split(':')[1].strip()}"
+                plan_number += 1
+            elif line != '':
+                plan_content.append(line + '\n')
+
+        # Print the last plan
+        if plan_title:
+            panel = Panel(f"{plan_title}\n{''.join(plan_content)}", expand=False)
+            print(panel)
 
     def choose_plan(self, plans, messages):
         while True:
